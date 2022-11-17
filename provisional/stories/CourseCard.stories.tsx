@@ -15,3 +15,10 @@ export default {
   const Template: ComponentStory<typeof CourseCard> = (args) => <CourseCard {...args} />;
 
 export const Main = Template.bind({});
+
+Main.args = {
+  courseName: "Pronghorn Club",
+  location: "Bend, OR",
+  rating: 60,
+  imgUrl: 'images/pronghorn.jpg',
+};
