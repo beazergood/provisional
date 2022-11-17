@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+import {CourseCard} from '../components/CourseCard/CourseCard.view';
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -37,17 +39,7 @@ export default function Home() {
             <p>Take a look at some different styles of layout</p>
           </a>
 
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Other &rarr;</h2>
-            <p>
-              Some more text here 
-            </p>
-          </a>
+          <CourseCard courseName="Pronghorn Golf Club" location="Bend, OR" rating={80} />
         </div>
       </main>
 
