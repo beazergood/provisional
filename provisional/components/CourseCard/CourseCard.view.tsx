@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import Slider from '../Slider/Slider.view'
 
 // import {Star, ThumbUp, ThumbDown} from '@styled-icons/heroicons-solid'
 import { Star, ThumbUp, ThumbDown } from '@styled-icons/heroicons-outline'
 
 const Card = styled.div`
-  background: url(${(props)=>props.imgUrl}) no-repeat;
+  background: url(${(props) => props.imgUrl}) no-repeat;
   background-size: cover;
   /* height: 300px; */
   width: 350px;
@@ -31,7 +30,8 @@ const H3 = styled.h3`
   display: inline-block;
   text-align: center;
   font-weight: 900;
-  color: #0074d9;
+  color: #fff;
+  -webkit-text-stroke: 2px #5b5b5b;
 `
 
 const H5 = styled.h5`
@@ -47,35 +47,9 @@ const H5 = styled.h5`
   font-size: 16px;
   margin: 0;
 `
-const height = '36px'
-const thumbHeight = 26
-const trackHeight = '16px'
-
-// colours
-const upperColor = '#edf5f9'
-const lowerColor = '#0199ff'
-const thumbColor = '#ddd'
-const thumbHoverColor = '#ccc'
-const upperBackground = `linear-gradient(to bottom, ${upperColor}, ${upperColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`
-const lowerBackground = `linear-gradient(to bottom, ${lowerColor}, ${lowerColor}) 100% 50% / 100% ${trackHeight} no-repeat transparent`
-
-// Webkit cannot style progress so we fake it with a long shadow on the thumb element
-const makeLongShadow = (color: string, size: string) => {
-  let i = 18
-  let shadow = `${i}px 0 0 ${size} ${color}`
-
-  for (; i < 706; i++) {
-    shadow = `${shadow}, ${i}px 0 0 ${size} ${color}`
-  }
-
-  return shadow
-}
-
-const Wrapper = styled.div`
-  width: 100%;
-`
 
 const ButtonsContainer = styled.div`
+  margin: 10px 0px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -102,7 +76,7 @@ interface CourseCardProps {
   /**
    * Course imgage source label
    */
-   imgUrl: string
+  imgUrl: string
   /**
    * Number from 1-10 rating the course
    */
@@ -125,11 +99,6 @@ export const CourseCard = ({
         <H3>{courseName}</H3>
         <H5>{location}</H5>
       </TextContainer>
-      <Wrapper>
-        <Slider color="#0074D9" />
-        <Slider color="#0074D9" />
-        <Slider color="#0074D9" />
-      </Wrapper>
       <ButtonsContainer>
         <Button>
           <ThumbDown size="40" color="#444" />

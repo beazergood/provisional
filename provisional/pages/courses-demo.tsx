@@ -5,7 +5,7 @@ import { CourseCard } from '../components/CourseCard/CourseCard.view'
 export default function CoursesDemo() {
   const courses = [
     {
-      courseName: 'Pronghord Club',
+      courseName: 'Pronghorn Club',
       location: 'Bend, OR',
       rating: 95,
       imgUrl: 'images/pronghorn.jpg',
