@@ -21,7 +21,7 @@ const Button = styled.button`
 
 interface IconButtonProps {
   Icon: React.ReactElement;
-  onClicked: () => void
+  onClicked?: () => void
 }
 
 /**
