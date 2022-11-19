@@ -171,8 +171,7 @@ export const CourseCard = ({
       <CardBack>
         <Slider label="Vibe" color="#FFDC24" />
         <Slider label="Course" color="#FFDC24" />
-        <Slider label="Price" color="#FFDC24" />
-      </CardBack>
+        </CardBack>
     </Card>
   )
 }
