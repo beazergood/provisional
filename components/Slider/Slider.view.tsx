@@ -53,7 +53,7 @@ const Styles = styled.div<SliderProps>`
 
 interface SliderProps {
   color: string
-  label: string
+  label?: string
 }
 
 export default class Slider extends React.Component<SliderProps> {
