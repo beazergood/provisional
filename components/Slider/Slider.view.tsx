@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const sliderThumbStyles = (props) => (`
+const sliderThumbStyles = (props:SliderProps) => (`
   width: 15px;
   height: 15px;
   background: ${props.color};
@@ -9,7 +9,7 @@ const sliderThumbStyles = (props) => (`
   outline: 5px solid #333;
 `);
 
-const Styles = styled.div`
+const Styles = styled.div<SliderProps>`
   display: flex;
   align-items: center;
   color: #fff;
@@ -42,18 +42,23 @@ const Styles = styled.div`
   }
 `;
 
-export default class Slider extends React.Component {
+interface SliderProps {
+  color: string;
+  label: string;
+}
+
+export default class Slider extends React.Component<SliderProps> {
   state = {
     value: 50
   }
 
-  handleOnChange = (e) => this.setState({ value: e?.target?.value })
+  
 
   render() {
     return (
-      <Styles opacity={this.state.value > 10 ? (this.state.value / 100) : .1} color={this.props.color}>
+      <Styles color={this.props.color} label={this.props.label}>
         <label>{this.props.label}</label>
-        <input type="range" min={0} max={100} value={this.state.value} className="slider" onChange={this.handleOnChange} />
+        <input type="range" min={0} max={100} value={this.state.value} className="slider"/>
         <div className="value">{this.state.value}</div>
       </Styles>
     )
