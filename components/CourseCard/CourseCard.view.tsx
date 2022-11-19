@@ -17,6 +17,7 @@ interface CardProps {
 }
 
 const Card = styled.div<CardProps>`
+  z-index:0;
   box-sizing: border-box;
   background: url(${(props) => props?.imgUrl}) no-repeat;
   background-size: cover;
@@ -82,6 +83,11 @@ const MoreInfo = styled.div`
   position: relative;
   display: flex;
   flex-direction: row-reverse;
+
+  &.flipped {
+    transform: rotateY(180deg);
+    transition: 150ms;
+  }
 `
 
 const CardFront = styled.div`
@@ -90,6 +96,8 @@ const CardFront = styled.div`
   backface-visibility: hidden;
   display: flex;
   flex-direction: column;
+  flex-grow:1;
+  justify-content: space-between;
 `
 
 const CardBack = styled.div`
@@ -100,6 +108,7 @@ const CardBack = styled.div`
   display: flex;
   flex-direction: column;
   width: 330px;
+  margin-top: 40px;
 `
 
 interface CourseCardProps {
@@ -135,13 +144,19 @@ export const CourseCard = ({
 
   return (
     <Card imgUrl={imgUrl} className={`card ${flip ? 'flip' : ''}`}>
+      <MoreInfo className={` ${flip ? `flipped` : ''}`}>
+        <IconButton
+          Icon={
+            flip ? (
+              <XCircle size="20" color="#444" />
+            ) : (
+              <InformationCircle size="20" color="#444" />
+            )
+          }
+          onClicked={() => setFlip(!flip)}
+        />
+      </MoreInfo>
       <CardFront>
-        <MoreInfo>
-          <IconButton
-            Icon={<InformationCircle size="20" color="#444" />}
-            onClicked={() => setFlip(!flip)}
-          />
-        </MoreInfo>
         <TextContainer>
           <H3>{courseName}</H3>
           <H5>{location}</H5>
@@ -154,12 +169,6 @@ export const CourseCard = ({
       </CardFront>
 
       <CardBack>
-        <MoreInfo>
-          <IconButton
-            Icon={<XCircle size="20" color="#444" />}
-            onClicked={() => setFlip(!flip)}
-          />
-        </MoreInfo>
         <Slider label="Vibe" color="#FFDC24" />
         <Slider label="Course" color="#FFDC24" />
         <Slider label="Price" color="#FFDC24" />
