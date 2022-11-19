@@ -32,10 +32,6 @@ const Card = styled.div<CardProps>`
   transform-style: preserve-3d;
   transition: 150ms;
   
-  &:hover {
-    --translate-y: -2px;
-  }
-
   &.card.flip {
     --rotate-y: 180deg;
   }
