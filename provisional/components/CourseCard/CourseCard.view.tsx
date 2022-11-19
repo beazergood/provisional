@@ -1,19 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
+import { IconButton } from '../IconButton/IconButton.view'
 // import {Star, ThumbUp, ThumbDown} from '@styled-icons/heroicons-solid'
-import { Star, ThumbUp, ThumbDown } from '@styled-icons/heroicons-outline'
+import {
+  Star,
+  ThumbUp,
+  ThumbDown,
+  InformationCircle,
+  XCircle,
+} from '@styled-icons/heroicons-outline'
+import Slider from '../Slider/Slider.view'
 
 const Card = styled.div`
-  background: url(${(props) => props.imgUrl}) no-repeat;
+box-sizing: border-box;
+background: url(${(props) => props.imgUrl}) no-repeat;
   background-size: cover;
-  /* height: 300px; */
+  min-height: 300px;
   width: 350px;
   border-radius: 3px;
   padding: 10px;
   display: flex;
   flex-direction column;
   justify-content: space-between;
+  position: relative;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+  transform-style: preserve-3d;
+  transition: 150ms;
+  
+  &:hover {
+    --translate-y: -2px;
+  }
+
+  &.card.flip {
+    --rotate-y: 180deg;
+  }
 `
 
 const TextContainer = styled.div`
@@ -45,7 +66,9 @@ const H5 = styled.h5`
   border-radius: 5px;
   display: inline-block;
   font-size: 16px;
+  font-weight: 400;
   margin: 0;
+  color: white;
 `
 
 const ButtonsContainer = styled.div`
@@ -55,13 +78,28 @@ const ButtonsContainer = styled.div`
   justify-content: space-around;
 `
 
-const Button = styled.button`
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  height: 56px;
-  width: 56px;
-  border: none;
-  padding: 5px;
+const MoreInfo = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+`
+
+const CardFront = styled.div`
+  /* position: absolute; */
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+`
+
+const CardBack = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 330px;
 `
 
 interface CourseCardProps {
@@ -93,23 +131,39 @@ export const CourseCard = ({
   imgUrl,
   ...props
 }: CourseCardProps) => {
+  const [flip, setFlip] = useState(false)
+
   return (
-    <Card imgUrl={imgUrl}>
-      <TextContainer>
-        <H3>{courseName}</H3>
-        <H5>{location}</H5>
-      </TextContainer>
-      <ButtonsContainer>
-        <Button>
-          <ThumbDown size="40" color="#444" />
-        </Button>
-        <Button>
-          <Star size="40" color="#444" />
-        </Button>
-        <Button>
-          <ThumbUp size="40" color="#444" />
-        </Button>
-      </ButtonsContainer>
+    <Card imgUrl={imgUrl} className={`card ${flip ? 'flip' : ''}`}>
+      <CardFront>
+        <MoreInfo>
+          <IconButton
+            Icon={<InformationCircle size="20" color="#444" />}
+            onClicked={() => setFlip(!flip)}
+          />
+        </MoreInfo>
+        <TextContainer>
+          <H3>{courseName}</H3>
+          <H5>{location}</H5>
+        </TextContainer>
+        <ButtonsContainer>
+          <IconButton Icon={<ThumbDown size="40" color="#444" />} />
+          <IconButton Icon={<Star size="40" color="#444" />} />
+          <IconButton Icon={<ThumbUp size="40" color="#444" />} />
+        </ButtonsContainer>
+      </CardFront>
+
+      <CardBack>
+        <MoreInfo>
+          <IconButton
+            Icon={<XCircle size="20" color="#444" />}
+            onClicked={() => setFlip(!flip)}
+          />
+        </MoreInfo>
+        <Slider label="Vibe" color="#FFDC24" />
+        <Slider label="Course" color="#FFDC24" />
+        <Slider label="Price" color="#FFDC24" />
+      </CardBack>
     </Card>
   )
 }

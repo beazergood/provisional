@@ -2,22 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 const sliderThumbStyles = (props) => (`
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   background: ${props.color};
   cursor: pointer;
   outline: 5px solid #333;
-  opacity: ${props.opacity};
-  -webkit-transition: .2s;
-  transition: opacity .2s;
 `);
 
 const Styles = styled.div`
   display: flex;
   align-items: center;
-  color: #888;
+  color: #fff;
   margin-bottom: 1rem;
-
+  box-sizing: border-box;
+  
   .value {
     flex: 1;
     font-size: 2rem;
@@ -53,8 +51,9 @@ export default class Slider extends React.Component {
 
   render() {
     return (
-      <Styles opacity={this.state.value > 10 ? (this.state.value / 255) : .1} color={this.props.color}>
-        <input type="range" min={0} max={255} value={this.state.value} className="slider" onChange={this.handleOnChange} />
+      <Styles opacity={this.state.value > 10 ? (this.state.value / 100) : .1} color={this.props.color}>
+        <label>{this.props.label}</label>
+        <input type="range" min={0} max={100} value={this.state.value} className="slider" onChange={this.handleOnChange} />
         <div className="value">{this.state.value}</div>
       </Styles>
     )
