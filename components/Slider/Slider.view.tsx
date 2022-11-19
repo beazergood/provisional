@@ -1,13 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-const sliderThumbStyles = (props:SliderProps) => (`
+const sliderThumbStyles = (props: SliderProps) => `
   width: 15px;
   height: 15px;
   background: ${props.color};
   cursor: pointer;
-  outline: 5px solid #333;
-`);
+  outline: 2px solid #fff;
+  border-radius: 50%;
+
+  &:hover {
+    scale: 1.05;
+  }
+
+  &:active {
+    scale: 1.5;
+  }
+`
 
 const Styles = styled.div<SliderProps>`
   display: flex;
@@ -15,7 +24,7 @@ const Styles = styled.div<SliderProps>`
   color: #fff;
   margin-bottom: 1rem;
   box-sizing: border-box;
-  
+
   .value {
     flex: 1;
     font-size: 2rem;
@@ -33,32 +42,40 @@ const Styles = styled.div<SliderProps>`
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      ${props => sliderThumbStyles(props)}
+      ${(props) => sliderThumbStyles(props)}
     }
 
     &::-moz-range-thumb {
-      ${props => sliderThumbStyles(props)}
+      ${(props) => sliderThumbStyles(props)}
     }
   }
-`;
+`
 
 interface SliderProps {
-  color: string;
-  label: string;
+  color: string
+  label: string
 }
 
 export default class Slider extends React.Component<SliderProps> {
   state = {
-    value: 50
+    value: 50,
   }
 
-  
+  handleOnChange = (e: { target: { value: any } }) =>
+    this.setState({ value: e?.target?.value })
 
   render() {
     return (
-      <Styles color={this.props.color} label={this.props.label}>
+      <Styles color={this.props.color}>
         <label>{this.props.label}</label>
-        <input type="range" min={0} max={100} value={this.state.value} className="slider"/>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={this.state.value}
+          className="slider"
+          onChange={this.handleOnChange}
+        />
         <div className="value">{this.state.value}</div>
       </Styles>
     )
