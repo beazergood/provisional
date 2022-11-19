@@ -31,7 +31,7 @@ const Card = styled.div<CardProps>`
   transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
   transform-style: preserve-3d;
   transition: 150ms;
-  
+
   &.card.flip {
     --rotate-y: 180deg;
   }
