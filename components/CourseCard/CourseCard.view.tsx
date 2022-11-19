@@ -94,6 +94,7 @@ const CardFront = styled.div`
   /* position: absolute; */
   box-sizing: border-box;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   flex-grow:1;
@@ -105,6 +106,7 @@ const CardBack = styled.div`
   position: absolute;
   transform: rotateY(180deg);
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   width: 330px;
