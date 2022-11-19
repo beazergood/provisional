@@ -12,9 +12,13 @@ import {
 } from '@styled-icons/heroicons-outline'
 import Slider from '../Slider/Slider.view'
 
-const Card = styled.div`
-box-sizing: border-box;
-background: url(${(props) => props.imgUrl}) no-repeat;
+interface CardProps {
+  imgUrl?: string
+}
+
+const Card = styled.div<CardProps>`
+  box-sizing: border-box;
+  background: url(${(props) => props?.imgUrl}) no-repeat;
   background-size: cover;
   min-height: 300px;
   width: 350px;
@@ -114,7 +118,7 @@ interface CourseCardProps {
   /**
    * Course imgage source label
    */
-  imgUrl: string
+  imgUrl?: string
   /**
    * Number from 1-10 rating the course
    */
