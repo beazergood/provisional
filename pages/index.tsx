@@ -38,8 +38,6 @@ export default function Home() {
             <h2>Examples &rarr;</h2>
             <p>Take a look at some different styles of layout</p>
           </a>
-
-          <CourseCard courseName="Pronghorn Golf Club" location="Bend, OR" rating={80} />
         </div>
       </main>
 
