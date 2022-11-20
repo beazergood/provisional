@@ -1,10 +1,17 @@
 import Head from 'next/head'
 import Image from 'next/image'
+/** supabase provides user auth and database */
+import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+
+import Account from '../components/Account/Account.view'
+
 import styles from '../styles/Home.module.css'
 
-import {CourseCard} from '../components/CourseCard/CourseCard.view';
-
 export default function Home() {
+  const session = useSession()
+  const supabase = useSupabaseClient()
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,28 +24,21 @@ export default function Home() {
         <h1 className={styles.title}>{'Provisional 🏌🏻‍♂️'}</h1>
 
         <p className={styles.description}>
-          {"Keep track of courses you've played or want to play "}
+          {"Track courses you've played."}
+          <br />
+          {'Save ones you want to play.'}
+          <br />
+          {"Tell your friends where's good."}
         </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Rate &rarr;</h2>
-            <p>Was it a fun course? Would you play there again?</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Plan &rarr;</h2>
-            <p>Where is on your bucket list?</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Take a look at some different styles of layout</p>
-          </a>
-        </div>
+        {!session ? (
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            theme="dark"
+          />
+        ) : (
+          <Account session={session} />
+        )}
       </main>
 
       <footer className={styles.footer}>
