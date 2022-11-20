@@ -31,7 +31,7 @@ const CourseCardBackContainer = styled.div`
   flex-direction: column;
   width: 330px;
   margin-top: 40px;
-  background: rgba(255,255,255,.8);
+  background: rgba(255, 255, 255, 0.8);
   padding: 5px;
   border-radius: 20px;
 `
@@ -39,6 +39,7 @@ const CourseCardBackContainer = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 `
 
 const H3 = styled.h3`
@@ -48,9 +49,9 @@ const H3 = styled.h3`
   border-radius: 5px;
   display: inline-block;
   text-align: left;
-  font-weight: 400;
+  font-weight: 300;
   color: #333;
-  -webkit-text-stroke: 2px #5b5b5b;
+  text-shadow: 1px 1px 1px #5b5b5b;
 `
 
 const H5 = styled.h5`
@@ -64,7 +65,7 @@ const H5 = styled.h5`
   border-radius: 5px;
   display: inline-block;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
   color: white;
 `
@@ -76,13 +77,20 @@ const ButtonsContainer = styled.div`
   justify-content: space-around;
 `
 
+const MyNotes = styled.textarea`
+min-height: 80px;
+margin:  10px 0;
+border-radius: 5px;
+stroke: none;
+`
+
 /**
  * Content on the back of a course card
  */
 export const CourseCardBack = ({
   courseName,
   location,
-  rating
+  rating,
 }: CourseCardBackProps) => {
   return (
     <CourseCardBackContainer>
@@ -90,14 +98,16 @@ export const CourseCardBack = ({
         <H3>{courseName}</H3>
         <H5>{location}</H5>
       </TextContainer>
-      <ButtonsContainer>
+      {/* <ButtonsContainer>
         <IconButton Icon={<ThumbDown size="40" color="#444" />} />
         <IconButton Icon={<Star size="40" color="#444" />} />
         <IconButton Icon={<ThumbUp size="40" color="#444" />} />
-      </ButtonsContainer>
-      <Slider label="Vibe" color="#FFDC24" />
-      <Slider label="Course" color="#FFDC24" />
-      <Slider label="My Rating" color="#FFDC24" value={rating}/>
+      </ButtonsContainer> */}
+      <Slider label="Vibe" color="#FFDC24" value={5} />
+      <Slider label="Course" color="#FFDC24" value={5} />
+      <Slider label="My Rating" color="#FFDC24" value={rating} />
+      <label>My Notes</label>
+      <MyNotes placeholder='How were the greens? Anything to remember for next time?'/>
     </CourseCardBackContainer>
   )
 }

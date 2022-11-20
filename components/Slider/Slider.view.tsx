@@ -21,13 +21,13 @@ const sliderThumbStyles = (props: SliderProps) => `
 const Styles = styled.div<SliderProps>`
   display: flex;
   align-items: center;
-  color: #fff;
+  color: #444;
   margin-bottom: 1rem;
   box-sizing: border-box;
 
   .value {
     flex: 1;
-    font-size: 2rem;
+    font-size: 1.3rem;
   }
 
   .slider {
@@ -72,7 +72,7 @@ export default class Slider extends React.Component<SliderProps> {
         <input
           type="range"
           min={0}
-          max={100}
+          max={10}
           value={this.state.value}
           className="slider"
           onChange={this.handleOnChange}

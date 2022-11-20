@@ -49,7 +49,7 @@ const H3 = styled.h3`
   text-align: center;
   font-weight: 900;
   color: #fff;
-  -webkit-text-stroke: 2px #5b5b5b;
+  text-shadow: 1px 1px 1px #5b5b5b
 `
 
 const H5 = styled.h5`
@@ -63,7 +63,7 @@ const H5 = styled.h5`
   border-radius: 5px;
   display: inline-block;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
   color: white;
 `
