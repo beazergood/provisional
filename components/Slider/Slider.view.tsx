@@ -54,11 +54,12 @@ const Styles = styled.div<SliderProps>`
 interface SliderProps {
   color: string
   label?: string
+  value?: number
 }
 
 export default class Slider extends React.Component<SliderProps> {
   state = {
-    value: 50,
+    value: this.props.value
   }
 
   handleOnChange = (e: { target: { value: any } }) =>
