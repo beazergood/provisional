@@ -1,9 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
+
+import { motion } from 'framer-motion'
+
 /** supabase provides user auth and database */
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react'
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
-
 import Account from '../components/Account/Account.view'
 
 import styles from '../styles/Home.module.css'
@@ -11,7 +14,12 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   const session = useSession()
   const supabase = useSupabaseClient()
-
+  const variants = {
+    hidden: { opacity: 0, x: -200, y: 0 },
+    enter: { opacity: 1, x: 0, y: 0 },
+    exit: { opacity: 0, x: 0, y: -100 },
+  }
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -20,8 +28,48 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>{'Provisional 🏌🏻‍♂️'}</h1>
+      <motion.main
+        className={styles.main}
+        variants={variants} // Pass the variant object into Framer Motion
+        initial="hidden" // Set the initial state to variants.hidden
+        animate="enter" // Animated state to variants.enter
+        exit="exit" // Exit state (used later) to variants.exit
+        transition={{ type: 'linear' }} // Set the transition to linear
+      >
+        <h1 className={styles.title}>
+          <motion.span
+            style={{ textAlign: 'center', display: 'block' }}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={{
+              hidden: {
+                rotate: 400,
+                scale: .5,
+                opacity: 0.1,
+              },
+              visible: {
+                scale: 1,
+                opacity: 1,
+                rotate: 0,
+                transition: {
+                  delay: 0.4,
+                },
+              },
+              exit: {
+                scale: 2,
+                opacity:0,
+                rotate: 270,
+                transition: {
+                  delay: .5
+                }
+              }
+            }}
+          >
+            {'🏌🏻‍♂️'}
+          </motion.span>
+          {'Provisional'}
+        </h1>
 
         <p className={styles.description}>
           {"Track courses you've played."}
@@ -39,7 +87,8 @@ export default function Home() {
         ) : (
           <Account session={session} />
         )}
-      </main>
+        <Link href="/courses-demo">Courses List Demo</Link>
+      </motion.main>
 
       <footer className={styles.footer}>
         <a
