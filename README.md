@@ -32,3 +32,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+## Supabase migrate via github action on master
+https://dev.to/afmire877/complete-setup-to-running-supabase-locally-nextjs-supabase-github-actions-1020
+
+## Hot to generate Supabase db types
+
+Ensure supabase is running `supabase start` from provisional root dir
+
+`supabase gen types typescript --project-id abcdefghijkl > lib/database.types.ts`
+
+
+To connect to local postgres db
+```bash
+psql -h localhost -p 54321 -U postgres -W -d courses
+```
+
+psql postgres://[USERNAME]:[PASSWORD]@[HOSTNAME]:[PORT]/[DATABASENAME]?sslmode=require
+   
+psql postgres://postgres:test1234@localhost:5432/courses?sslmode=require
+   
