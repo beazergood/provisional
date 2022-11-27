@@ -62,10 +62,8 @@ const logoVariants = {
 }
 
 export default function Courses({ data }: { data: any }) {
-  console.log('courses: ', data)
 
   const coursesList = data.map((course: any) => {
-    console.log('course: ', course)
     return (
       <motion.div key={course.id} variants={item}>
         {course && (
