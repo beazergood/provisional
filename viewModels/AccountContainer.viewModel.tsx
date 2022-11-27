@@ -4,8 +4,13 @@ import {
   useSupabaseClient,
   Session,
 } from '@supabase/auth-helpers-react'
-import { Database } from '../utils/database.types'
-
+// import { Database } from '../utils/database.types'
+interface Database {
+    public: any
+    Tables: any
+    profiles: any
+    Row: any
+}
 import Account from '../components/Account/Account.view'
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
