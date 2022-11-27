@@ -14,6 +14,10 @@
         "seed": "yarn create-db && Node utils/main.js"
     },
     "dependencies": {
+        "@chakra-ui/react": "^2.4.1",
+        "@chakra-ui/transition": "^2.0.12",
+        "@emotion/react": "^11.10.5",
+        "@emotion/styled": "^11.10.5",
         "@next/font": "^13.0.3",
         "@supabase/auth-helpers-nextjs": "^0.5.2",
         "@supabase/auth-helpers-react": "^0.3.1",
@@ -34,6 +38,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.20.2",
+        "@chakra-ui/storybook-addon": "^4.0.13",
         "@storybook/addon-actions": "^6.5.13",
         "@storybook/addon-essentials": "^6.5.13",
         "@storybook/addon-interactions": "^6.5.13",
