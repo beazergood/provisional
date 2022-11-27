@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import {CourseCard} from '../components/CourseCard/CourseCard.view';
+import CourseCard from '../components/CourseCard/CourseCard.view';
 
 export default {
     title: 'Components/CourseCard',
@@ -17,8 +17,8 @@ export default {
 export const Main = Template.bind({});
 
 Main.args = {
-  courseName: "Pronghorn Club",
-  location: "Bend, OR",
-  rating: 60,
+  name: "Pronghorn Club",
+  city: "Bend",
+  state: "OR",  
   imgUrl: 'images/pronghorn.jpg',
 };

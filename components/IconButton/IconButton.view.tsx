@@ -28,5 +28,5 @@ interface IconButtonProps {
  * Primary UI component for user interaction
  */
 export const IconButton = ({ Icon, onClicked }: IconButtonProps) => {
-  return <Button onClick={onClicked}>{Icon}</Button>
+  return <Button className={'red-bg'} onClick={onClicked}>{Icon}</Button>
 }

@@ -7,9 +7,13 @@
 - installed Next & Storybook
 - added supabase
 
+## Sat 26 Nov 2022
 ## TODO
 
-- need to generate local database
 - generate database.types file
-- sign up / connect to local supabase
-- login to cloud supabase
+
+## Sun 27 Nov 2022
+
+- added chakra UI
+- wired up to supabase db
+- signup/connect done
