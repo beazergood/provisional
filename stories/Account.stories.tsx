@@ -17,7 +17,7 @@ export default {
 export const Main = Template.bind({});
 
 Main.args = {
-  first_name: 'Dave',
-  last_name: 'Beazer',
-  email: 'hi@davebeazer.dev'
+  // first_name: 'Dave',
+  // last_name: 'Beazer',
+  // email: 'hi@davebeazer.dev'
 };
