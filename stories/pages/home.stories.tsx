@@ -1,4 +1,4 @@
-import Home from "../../pages/index";
+import Home from "../../pages/account;
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {

@@ -1,16 +1,17 @@
 import React from 'react'
+import Link from 'next/link'
 import { Session } from '@supabase/auth-helpers-react'
 import {
   Button,
+  ButtonGroup,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
+  Stack,
 } from '@chakra-ui/react'
 
 import Avatar from '../Avatar/Avatar.view'
@@ -47,53 +48,61 @@ export default function Account({
   setWebsite: (val: string) => void
 }) {
   return (
-    <Card title="Manage Your Account">
-      <CardHeader>
-        {user && (
-          <Avatar
-            uid={user.id}
-            url={avatar_url}
-            size={150}
-            onUpload={(url) => {
-              setAvatarUrl(url)
-              updateProfile({ username, website, avatar_url: url })
-            }}
-          />
-        )}
-      </CardHeader>
-      <CardBody>
-        <FormControl>
-          <FormLabel>Email address</FormLabel>
-          <Input type="email" value={session?.user.email} />
-        </FormControl>
+    <Stack gap={4}>
+            <Link href="/">
+        <Button as="a">Courses</Button>
+      </Link>
 
-        <FormControl>
-          <FormLabel>Username</FormLabel>
-          <Input
-            type="text"
-            value={username || ''}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </FormControl>
+      <Card title="Manage Your Account">
+        <CardHeader>
+          {user && (
+            <Avatar
+              uid={user.id}
+              url={avatar_url}
+              size={150}
+              onUpload={(url) => {
+                setAvatarUrl(url)
+                updateProfile({ username, website, avatar_url: url })
+              }}
+            />
+          )}
+        </CardHeader>
+        <CardBody>
+          <FormControl>
+            <FormLabel>Email address</FormLabel>
+            <Input type="email" value={session?.user.email} />
+          </FormControl>
 
-        <FormControl>
-          <FormLabel>Website</FormLabel>
-          <Input
-            type="text"
-            value={website || ''}
-            onChange={(e) => setWebsite(e.target.value)}
-          />
-        </FormControl>
-      </CardBody>
-      <CardFooter>
-        <Button
-          className="button primary block"
-          onClick={() => updateProfile({ username, website, avatar_url })}
-        >
-          {'Update'}
-        </Button>
-        <Button onClick={onSignOut}>Sign Out</Button>
-      </CardFooter>
-    </Card>
+          <FormControl>
+            <FormLabel>Username</FormLabel>
+            <Input
+              type="text"
+              value={username || ''}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </FormControl>
+
+          <FormControl>
+            <FormLabel>Website</FormLabel>
+            <Input
+              type="text"
+              value={website || ''}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+          </FormControl>
+        </CardBody>
+        <CardFooter>
+          <ButtonGroup>
+            <Button
+              className="button primary block"
+              onClick={() => updateProfile({ username, website, avatar_url })}
+            >
+              {'Update'}
+            </Button>
+            <Button onClick={onSignOut}>Sign Out</Button>
+          </ButtonGroup>
+        </CardFooter>
+      </Card>
+    </Stack>
   )
 }

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
+import { Button, Image} from '@chakra-ui/react'
+// FIXME generate types
 // import { Database } from '../utils/database.types'
 interface Database {
   public: any
@@ -74,18 +76,23 @@ export default function Avatar({
   return (
     <div>
       {avatarUrl ? (
-        <img
-          src={avatarUrl}
-          alt="Avatar"
-          className="avatar image"
-          style={{ height: size, width: size }}
-        />
+        <Image
+        style={{margin: '0 auto'}}
+        borderRadius='full'
+        boxSize={size}
+        src={avatarUrl}
+        alt='User image'
+      />
+        
       ) : (
         <div className="avatar no-image" style={{ height: size, width: size }} />
       )}
-      <div style={{ width: size }}>
+      <div style={{ width: size, margin: '10px auto', textAlign: 'center' }}>
         <label className="button primary block" htmlFor="single">
+          <Button>
+
           {uploading ? 'Uploading ...' : 'Upload'}
+          </Button>
         </label>
         <input
           style={{
