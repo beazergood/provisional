@@ -1,9 +1,9 @@
-import Home from "../../pages/account;
+// import Courses from "../../pages/index";
 
-/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-export default {
-  title: "Pages/Home",
-  component: Home,
-};
+// /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
+// export default {
+//   title: "Pages/Home",
+//   component: Courses,
+// };
 
-export const HomePage = () => <Home />
+// export const HomePage = () => <Courses />
