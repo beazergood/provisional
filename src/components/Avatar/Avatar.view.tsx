@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useSupabaseClient } from '@supabase/auth-helpers-react'
-import { Button, Image} from '@chakra-ui/react'
+import { Button, Image } from '@chakra-ui/react'
 // FIXME generate types
 // import { Database } from '../utils/database.types'
 interface Database {
@@ -26,24 +26,32 @@ export default function Avatar({
   const [avatarUrl, setAvatarUrl] = useState<Profiles['avatar_url']>(null)
   const [uploading, setUploading] = useState(false)
 
+  const downloadImage = useCallback(
+    (path: string) =>
+      async function downloadImage(path: string) {
+        try {
+          const { data, error } = await supabase.storage
+            .from('avatars')
+            .download(path)
+          if (error) {
+            throw error
+          }
+          const url = URL.createObjectURL(data)
+          setAvatarUrl(url)
+        } catch (error) {
+          console.log('Error downloading image: ', error)
+        }
+      },
+    [supabase.storage]
+  )
+
   useEffect(() => {
-    if (url) downloadImage(url)
-  }, [url])
+    if (url) {downloadImage(url)}
+  }, [url, downloadImage])
 
-  async function downloadImage(path: string) {
-    try {
-      const { data, error } = await supabase.storage.from('avatars').download(path)
-      if (error) {
-        throw error
-      }
-      const url = URL.createObjectURL(data)
-      setAvatarUrl(url)
-    } catch (error) {
-      console.log('Error downloading image: ', error)
-    }
-  }
-
-  const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
+  const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (
+    event
+  ) => {
     try {
       setUploading(true)
 
@@ -77,22 +85,21 @@ export default function Avatar({
     <div>
       {avatarUrl ? (
         <Image
-        style={{margin: '0 auto'}}
-        borderRadius='full'
-        boxSize={size}
-        src={avatarUrl}
-        alt='User image'
-      />
-        
+          style={{ margin: '0 auto' }}
+          borderRadius="full"
+          boxSize={size}
+          src={avatarUrl}
+          alt="User image"
+        />
       ) : (
-        <div className="avatar no-image" style={{ height: size, width: size }} />
+        <div
+          className="avatar no-image"
+          style={{ height: size, width: size }}
+        />
       )}
       <div style={{ width: size, margin: '10px auto', textAlign: 'center' }}>
         <label className="button primary block" htmlFor="single">
-          <Button>
-
-          {uploading ? 'Uploading ...' : 'Upload'}
-          </Button>
+          <Button>{uploading ? 'Uploading ...' : 'Upload'}</Button>
         </label>
         <input
           style={{

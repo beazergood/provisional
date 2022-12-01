@@ -11,7 +11,6 @@ export default function Logo({ variants }: any) {
       variants={variants}
     >
       <Text
-        bgGradient="linear(to-l, #7928CA, #FF0080)"
         bgClip="text"
         fontSize="6xl"
         fontWeight="extrabold"

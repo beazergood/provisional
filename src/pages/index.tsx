@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import supabase from '../utils/supabase'
 import { motion } from 'framer-motion'
-import { Button, Flex } from '@chakra-ui/react'
+import { Button, Flex, useColorMode } from '@chakra-ui/react'
 import {
   useSession,
-  useSupabaseClient,
+  // useSupabaseClient,
   Session,
 } from '@supabase/auth-helpers-react'
 import CourseCard from '../components/CourseCard/CourseCard.view'
@@ -66,6 +66,7 @@ const logoVariants = {
 }
 
 export default function Courses({ data }: { data: any }) {
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const session: Session | null = useSession()
 
@@ -92,6 +93,10 @@ export default function Courses({ data }: { data: any }) {
     <Flex direction={'column'} alignItems={'center'}>
       <Logo variants={logoVariants} />
 
+      <Button onClick={toggleColorMode} color="primary">
+        Toggle {colorMode === "light" ? "Dark" : "Light"}
+      </Button>
+
       <motion.main
         variants={variants} // Pass the variant object into Framer Motion
         initial="hidden" // Set the initial state to variants.hidden
@@ -102,7 +107,8 @@ export default function Courses({ data }: { data: any }) {
       >
         {session &&
         <Link href="/account">
-          <Button as="a">Account</Button>
+          Account
+          {/* <Button>Account</Button> */}
         </Link>
         }
 

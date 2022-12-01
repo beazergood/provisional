@@ -4,7 +4,8 @@ import type { AppProps } from 'next/app'
 import { AnimatePresence } from 'framer-motion'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider, Session } from '@supabase/auth-helpers-react'
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+// import { ChakraProvider} from '@chakra-ui/react'
+// import theme from '../theme'
 
 function MyApp({
   Component,
@@ -14,20 +15,10 @@ function MyApp({
 }>) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
 
-  // 2. Extend the theme to include custom colors, fonts, etc
-  const colors = {
-    brand: {
-      900: '#1a365d',
-      800: '#153e75',
-      700: '#2a69ac',
-    },
-  }
-  
-  const theme = extendTheme({ colors })
   return (
-    <ChakraProvider theme={theme}>
+    // <ChakraProvider theme={theme}>
       <AnimatePresence
-        exitBeforeEnter
+        exitBeforeEnter={true}
         initial={false}
         onExitComplete={() => window.scrollTo(0, 0)}
       >
@@ -38,7 +29,7 @@ function MyApp({
           <Component {...pageProps} />
         </SessionContextProvider>
       </AnimatePresence>
-    </ChakraProvider>
+    // </ChakraProvider>
   )
 }
 export default MyApp

@@ -42,7 +42,7 @@ export default function CourseCard({
           </Text>
         </Stack>
       </CardBody>
-      <Collapse in={isOpen} animateOpacity>
+      <Collapse in={isOpen} animateOpacity={true}>
         <CardFooter>
           <ButtonGroup spacing="2">
             <Button variant="solid" colorScheme="blue">

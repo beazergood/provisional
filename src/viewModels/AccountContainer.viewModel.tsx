@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   useUser,
   useSupabaseClient,
@@ -23,11 +23,7 @@ export default function AccountContainer({ session }: { session: Session }) {
   const [website, setWebsite] = useState<Profiles['website']>(null)
   const [avatar_url, setAvatarUrl] = useState<Profiles['avatar_url']>(null)
 
-  useEffect(() => {
-    getProfile()
-  }, [session])
-
-  async function getProfile() {
+  const getProfile = useCallback(()=>async function getProfile() {
     try {
       setLoading(true)
       if (!user) throw new Error('No user')
@@ -53,7 +49,11 @@ export default function AccountContainer({ session }: { session: Session }) {
     } finally {
       setLoading(false)
     }
-  }
+  },[supabase, user])
+
+  useEffect(() => {
+    getProfile()
+  }, [session, getProfile])
 
   async function updateProfile({
     username,
