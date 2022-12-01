@@ -26,11 +26,11 @@ export default function AccountContainer({ session }: { session: Session }) {
   const getProfile = useCallback(()=>async function getProfile() {
     try {
       setLoading(true)
-      if (!user) throw new Error('No user')
+      if (!user) { throw new Error('No user') }
 
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select("username, website, avatar_url")
         .eq('id', user.id)
         .single()
 
