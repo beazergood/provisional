@@ -12,7 +12,7 @@
         "start": "next start",
         "storybook": "start-storybook -p 6006 -s ./public",
         "build-storybook": "build-storybook -s ./public",
-        "format": "rome --write -format src/components/**/*.tsx",
+        "format": "rome format --write src/components/**/*.tsx",
         "lint": "tsc --noEmit && rome check src/components/**/*.tsx",
         "create-db": "psql -U postgres < sql/schema.sql",
         "seed": "yarn create-db && Node src/utils/main.js",

@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
   background: rgba(255, 255, 255, 0.8);
@@ -15,16 +15,20 @@ const Button = styled.button`
   &:active {
     scale: .95;
   }
-`
+`;
 
 interface IconButtonProps {
-  Icon: React.ReactElement;
-  onClicked?: () => void
+	Icon: React.ReactElement;
+	onClicked?: () => void;
 }
 
 /**
  * Primary UI component for user interaction
  */
 export const IconButton = ({ Icon, onClicked }: IconButtonProps) => {
-  return <Button className={'red-bg'} onClick={onClicked}>{Icon}</Button>
-}
+	return (
+		<Button className={"red-bg"} onClick={onClicked}>
+			{Icon}
+		</Button>
+	);
+};
