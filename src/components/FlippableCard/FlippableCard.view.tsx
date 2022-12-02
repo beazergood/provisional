@@ -1,19 +1,24 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Star, ThumbUp, ThumbDown, InformationCircle, XCircle } from '@styled-icons/heroicons-outline'
+import {
+  Star,
+  ThumbUp,
+  ThumbDown,
+  InformationCircle,
+  XCircle,
+} from '@styled-icons/heroicons-outline'
 
 import { IconButton } from '../IconButton/IconButton.view'
 import Slider from '../Slider/Slider.view'
 
-
-export type  FlippableCardProps ={
+export type FlippableCardProps = {
   courseName: string
   location: string
   rating: number
   imgUrl: string
 }
 
-const Card = styled.div<{imgUrl:string}>`
+const Card = styled.div<{ imgUrl: string }>`
   box-sizing: border-box;
   background: url(${(props) => props?.imgUrl}) no-repeat;
   background-size: cover;
@@ -46,6 +51,22 @@ const MoreInfo = styled.div`
   }
 `
 
+const MoreInfoBtn = ({ setFlip, flip }:{setFlip: (val:boolean) => void, flip: boolean}) => {
+  return (
+    <MoreInfo className={` ${flip ? 'flipped' : ''}`}>
+      <IconButton
+        Icon={
+          flip ? (
+            <XCircle size="20" color="#444" />
+          ) : (
+            <InformationCircle size="20" color="#444" />
+          )
+        }
+        onClicked={() => setFlip(!flip)}
+      />
+    </MoreInfo>
+  )
+}
 /**
  * Primary UI component for user interaction
  */
@@ -53,24 +74,13 @@ export const FlippableCard = ({
   courseName,
   location,
   rating,
-  imgUrl
+  imgUrl,
 }: FlippableCardProps) => {
   const [flip, setFlip] = useState(false)
 
   return (
     <Card imgUrl={imgUrl} className={`card ${flip ? 'flip' : ''}`}>
-      <MoreInfo className={` ${flip ? "flipped" : ''}`}>
-        <IconButton
-          Icon={
-            flip ? (
-              <XCircle size="20" color="#444" />
-            ) : (
-              <InformationCircle size="20" color="#444" />
-            )
-          }
-          onClicked={() => setFlip(!flip)}
-        />
-      </MoreInfo>
+      <MoreInfoBtn flip={flip} setFlip={setFlip} />
 
       <CourseCardFront
         courseName={courseName}
@@ -96,12 +106,32 @@ const CourseCardFrontContainer = styled.div`
   flex-grow: 1;
   justify-content: space-between;
 `
+
+interface CourseCardFrontProps {
+  /**
+   * Label for coursename
+   */
+  courseName: string
+  /**
+   * Course location label
+   */
+  location: string
+  /**
+   * Course imgage source label
+   */
+  imgUrl?: string
+  /**
+   * Number from 1-10 rating the course
+   */
+  rating: number
+}
+
 /**
  * Content on the front of a course card
  */
 export const CourseCardFront = ({
   courseName,
-  location
+  location,
 }: CourseCardFrontProps) => {
   return (
     <CourseCardFrontContainer>
@@ -144,7 +174,7 @@ const CourseCardBackContainer = styled.div`
   flex-direction: column;
   width: 330px;
   margin-top: 40px;
-  background: rgba(255,255,255,.8);
+  background: rgba(255, 255, 255, 0.8);
   padding: 5px;
   border-radius: 20px;
 `
@@ -195,7 +225,7 @@ const ButtonsContainer = styled.div`
 export const CourseCardBack = ({
   courseName,
   location,
-  rating
+  rating,
 }: CourseCardBackProps) => {
   return (
     <CourseCardBackContainer>
@@ -210,28 +240,8 @@ export const CourseCardBack = ({
       </ButtonsContainer>
       <Slider label="Vibe" color="#FFDC24" />
       <Slider label="Course" color="#FFDC24" />
-      <Slider label="My Rating" color="#FFDC24" value={rating}/>
+      <Slider label="My Rating" color="#FFDC24" value={rating} />
     </CourseCardBackContainer>
   )
-}
-
-
-interface CourseCardFrontProps {
-  /**
-   * Label for coursename
-   */
-  courseName: string
-  /**
-   * Course location label
-   */
-  location: string
-  /**
-   * Course imgage source label
-   */
-  imgUrl?: string
-  /**
-   * Number from 1-10 rating the course
-   */
-  rating: number
 }
 
