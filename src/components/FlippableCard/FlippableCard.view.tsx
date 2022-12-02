@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import {
-	Star,
-	ThumbUp,
-	ThumbDown,
-	InformationCircle,
-	XCircle,
-} from "@styled-icons/heroicons-outline";
+  Star,
+  ThumbUp,
+  ThumbDown,
+  InformationCircle,
+  XCircle,
+} from '@styled-icons/heroicons-outline'
 
-import { IconButton } from "../IconButton/IconButton.view";
-import Slider from "../Slider/Slider.view";
+import { IconButton } from '../IconButton/IconButton.view'
+import Slider from '../Slider/Slider.view'
 
 export type FlippableCardProps = {
-	courseName: string;
-	location: string;
-	rating: number;
-	imgUrl: string;
-};
+  courseName: string
+  location: string
+  rating: number
+  imgUrl: string
+}
 
 const Card = styled.div<{ imgUrl: string }>`
   box-sizing: border-box;
@@ -49,56 +49,53 @@ const MoreInfo = styled.div`
     transform: rotateY(180deg);
     transition: 150ms;
   }
-`;
+`
 
-const MoreInfoBtn = ({
-	setFlip,
-	flip,
-}: { setFlip: (val: boolean) => void; flip: boolean }) => {
-	return (
-		<MoreInfo className={` ${flip ? "flipped" : ""}`}>
-			<IconButton
-				Icon={
-					flip ? (
-						<XCircle size="20" color="#444" />
-					) : (
-						<InformationCircle size="20" color="#444" />
-					)
-				}
-				onClicked={() => setFlip(!flip)}
-			/>
-		</MoreInfo>
-	);
-};
+const MoreInfoBtn = ({ setFlip, flip }:{setFlip: (val:boolean) => void, flip: boolean}) => {
+  return (
+    <MoreInfo className={` ${flip ? 'flipped' : ''}`}>
+      <IconButton
+        Icon={
+          flip ? (
+            <XCircle size="20" color="#444" />
+          ) : (
+            <InformationCircle size="20" color="#444" />
+          )
+        }
+        onClicked={() => setFlip(!flip)}
+      />
+    </MoreInfo>
+  )
+}
 /**
  * Primary UI component for user interaction
  */
 export const FlippableCard = ({
-	courseName,
-	location,
-	rating,
-	imgUrl,
+  courseName,
+  location,
+  rating,
+  imgUrl,
 }: FlippableCardProps) => {
-	const [flip, setFlip] = useState(false);
+  const [flip, setFlip] = useState(false)
 
-	return (
-		<Card imgUrl={imgUrl} className={`card ${flip ? "flip" : ""}`}>
-			<MoreInfoBtn flip={flip} setFlip={setFlip} />
+  return (
+    <Card imgUrl={imgUrl} className={`card ${flip ? 'flip' : ''}`}>
+      <MoreInfoBtn flip={flip} setFlip={setFlip} />
 
-			<CourseCardFront
-				courseName={courseName}
-				location={location}
-				rating={rating}
-			/>
+      <CourseCardFront
+        courseName={courseName}
+        location={location}
+        rating={rating}
+      />
 
-			<CourseCardBack
-				courseName={courseName}
-				location={location}
-				rating={rating}
-			/>
-		</Card>
-	);
-};
+      <CourseCardBack
+        courseName={courseName}
+        location={location}
+        rating={rating}
+      />
+    </Card>
+  )
+}
 
 const CourseCardFrontContainer = styled.div`
   box-sizing: border-box;
@@ -108,33 +105,33 @@ const CourseCardFrontContainer = styled.div`
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-between;
-`;
+`
 
 interface CourseCardFrontProps {
-	/**
-	 * Label for coursename
-	 */
-	courseName: string;
-	/**
-	 * Course location label
-	 */
-	location: string;
-	/**
-	 * Course imgage source label
-	 */
-	imgUrl?: string;
-	/**
-	 * Number from 1-10 rating the course
-	 */
-	rating: number;
+  /**
+   * Label for coursename
+   */
+  courseName: string
+  /**
+   * Course location label
+   */
+  location: string
+  /**
+   * Course imgage source label
+   */
+  imgUrl?: string
+  /**
+   * Number from 1-10 rating the course
+   */
+  rating: number
 }
 
 /**
  * Content on the front of a course card
  */
 export const CourseCardFront = ({
-	courseName,
-	location,
+  courseName,
+  location,
 }: CourseCardFrontProps) => {
 	return (
 		<CourseCardFrontContainer>
@@ -226,24 +223,25 @@ const ButtonsContainer = styled.div`
  * Content on the back of a course card
  */
 export const CourseCardBack = ({
-	courseName,
-	location,
-	rating,
+  courseName,
+  location,
+  rating,
 }: CourseCardBackProps) => {
-	return (
-		<CourseCardBackContainer>
-			<TextContainer>
-				<H3>{courseName}</H3>
-				<H5>{location}</H5>
-			</TextContainer>
-			<ButtonsContainer>
-				<IconButton Icon={<ThumbDown size="40" color="#444" />} />
-				<IconButton Icon={<Star size="40" color="#444" />} />
-				<IconButton Icon={<ThumbUp size="40" color="#444" />} />
-			</ButtonsContainer>
-			<Slider label="Vibe" color="#FFDC24" />
-			<Slider label="Course" color="#FFDC24" />
-			<Slider label="My Rating" color="#FFDC24" value={rating} />
-		</CourseCardBackContainer>
-	);
-};
+  return (
+    <CourseCardBackContainer>
+      <TextContainer>
+        <H3>{courseName}</H3>
+        <H5>{location}</H5>
+      </TextContainer>
+      <ButtonsContainer>
+        <IconButton Icon={<ThumbDown size="40" color="#444" />} />
+        <IconButton Icon={<Star size="40" color="#444" />} />
+        <IconButton Icon={<ThumbUp size="40" color="#444" />} />
+      </ButtonsContainer>
+      <Slider label="Vibe" color="#FFDC24" />
+      <Slider label="Course" color="#FFDC24" />
+      <Slider label="My Rating" color="#FFDC24" value={rating} />
+    </CourseCardBackContainer>
+  )
+}
+
