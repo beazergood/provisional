@@ -5,7 +5,7 @@ const Button = styled.button`
   background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   border: none;
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
 
   &:hover {
