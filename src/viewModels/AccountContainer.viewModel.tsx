@@ -22,6 +22,7 @@ export default function AccountContainer({ session }: { session: Session }) {
   const [username, setUsername] = useState<Profiles['username']>(null)
   const [website, setWebsite] = useState<Profiles['website']>(null)
   const [avatar_url, setAvatarUrl] = useState<Profiles['avatar_url']>(null)
+  const [email, setEmail] = useState<Profiles['email']>(null)
 
   const getProfile = useCallback(()=>async function getProfile() {
     try {
@@ -103,6 +104,7 @@ export default function AccountContainer({ session }: { session: Session }) {
       website={website}
       setWebsite={setWebsite}
       avatar_url={avatar_url}
+      setEmail={setEmail}
     />
   )
 }
