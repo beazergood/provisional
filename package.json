@@ -19,6 +19,7 @@
         "chromatic": "chromatic --exit-zero-on-changes"
     },
     "dependencies": {
+        "@chakra-ui/icons": "^2.0.13",
         "@chakra-ui/react": "^2.4.1",
         "@chakra-ui/transition": "^2.0.12",
         "@emotion/react": "^11.10.5",
