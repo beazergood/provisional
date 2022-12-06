@@ -1,14 +1,12 @@
-import Link from 'next/link'
 import supabase from '../utils/supabase'
 import { motion } from 'framer-motion'
-import { Button, Flex, useColorMode } from '@chakra-ui/react'
 import {
-  useSession,
-  // useSupabaseClient,
-  Session,
-} from '@supabase/auth-helpers-react'
+  Flex,
+  useColorMode,
+  useColorModeValue,
+} from '@chakra-ui/react'
+
 import CourseCard from '../components/CourseCard/CourseCard.view'
-import Logo from '../components/Logo/Logo.view'
 
 const randomImage = () => {
   const imageUrls = [
@@ -66,16 +64,15 @@ const logoVariants = {
 }
 
 export default function Courses({ data }: { data: any }) {
-  const { colorMode, toggleColorMode } = useColorMode();
-
-  const session: Session | null = useSession()
-
+  const { colorMode, toggleColorMode } = useColorMode()
+  const bg = useColorModeValue('brand.100', 'brand.600')
+  
   const coursesList = data.map((course: any) => {
     return (
       <motion.div
-        key={course.id}
         variants={item}
         style={{ margin: '5px auto' }}
+        key={course.id}
       >
         {course && (
           <CourseCard
@@ -83,6 +80,7 @@ export default function Courses({ data }: { data: any }) {
             city={course.city}
             state={course.state}
             imgUrl={randomImage()}
+            variant={colorMode}
           />
         )}
       </motion.div>
@@ -90,32 +88,21 @@ export default function Courses({ data }: { data: any }) {
   })
 
   return (
-    <Flex direction={'column'} alignItems={'center'}>
-      <Logo variants={logoVariants} />
+    
+      <Flex direction={'column'} alignItems={'center'}>
+        <motion.main
+          variants={variants} // Pass the variant object into Framer Motion
+          initial="hidden" // Set the initial state to variants.hidden
+          animate="enter" // Animated state to variants.enter
+          exit="exit" // Exit state (used later) to variants.exit
+          transition={{ type: 'linear' }} // Set the transition to linear
+          className=""
+        >
 
-      <Button onClick={toggleColorMode} color="primary">
-        Toggle {colorMode === "light" ? "Dark" : "Light"}
-      </Button>
-
-      <motion.main
-        variants={variants} // Pass the variant object into Framer Motion
-        initial="hidden" // Set the initial state to variants.hidden
-        animate="enter" // Animated state to variants.enter
-        exit="exit" // Exit state (used later) to variants.exit
-        transition={{ type: 'linear' }} // Set the transition to linear
-        className=""
-      >
-        {session &&
-        <Link href="/account">
-          Account
-          {/* <Button>Account</Button> */}
-        </Link>
-        }
-
-        <motion.ul variants={container} initial="hidden" animate="show">
-          {coursesList}
-        </motion.ul>
-      </motion.main>
-    </Flex>
+          <motion.ul variants={container} initial="hidden" animate="show">
+            {coursesList}
+          </motion.ul>
+        </motion.main>
+      </Flex>
   )
 }
