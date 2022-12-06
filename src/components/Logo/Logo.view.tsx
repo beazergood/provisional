@@ -1,19 +1,23 @@
+import Link from 'next/link'
 import { Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-export default function Logo({ variants }: any) {
+export const Logo = ({ variants }: any) => {
 	return (
-		<motion.h1
-			style={{ textAlign: "center", display: "block" }}
-			initial="hidden"
-			animate="visible"
-			exit="exit"
-			variants={variants}
-		>
-			<Text bgClip="text" fontSize="6xl" fontWeight="extrabold">
+		// <motion.h1
+		// 	style={{ textAlign: "center", display: "block" }}
+		// 	initial="hidden"
+		// 	animate="visible"
+		// 	exit="exit"
+		// 	variants={variants}
+		// >
+		<Link href="/">
+
+			<Text fontSize="2xl" fontWeight="extrabold">
 				{"🏌🏻‍♂️"}
 				{"Provisional"}
 			</Text>
-		</motion.h1>
+		</Link>
+		// </motion.h1>
 	);
 }

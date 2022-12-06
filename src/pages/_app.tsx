@@ -4,8 +4,7 @@ import type { AppProps } from 'next/app'
 import { AnimatePresence } from 'framer-motion'
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider, Session } from '@supabase/auth-helpers-react'
-// import { ChakraProvider} from '@chakra-ui/react'
-// import theme from '../theme'
+import { Nav } from '../components/Navbar/Navbar.view'
 
 function MyApp({
   Component,
@@ -26,6 +25,7 @@ function MyApp({
           supabaseClient={supabase}
           initialSession={pageProps.initialSession}
         >
+          <Nav/>
           <Component {...pageProps} />
         </SessionContextProvider>
       </AnimatePresence>
