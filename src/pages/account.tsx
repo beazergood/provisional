@@ -9,41 +9,41 @@ import {
   Card,
   CardBody,
   Container,
+  Flex,
   Heading,
   StackDivider,
-  Stack
+  Stack,
 } from '@chakra-ui/react'
 
 import AccountContainer from '../viewModels/AccountContainer.viewModel'
+import { Logo } from '../components/Logo/Logo.view'
 
 export default function Home() {
   const session: Session | null = useSession()
   const supabase = useSupabaseClient()
 
   return (
-    
-    <Box maxW="screen" minH="calc(100vh)" bg="brand.100" >
-        <Container centerContent={true}>
-
-        
+    <Box maxW="screen" minH="calc(100vh)" bg="brand.100">
+      <Container centerContent={true}>
         <Card maxW="md" my={'50px'}>
           <CardBody bg="">
             {session ? (
               <AccountContainer session={session} />
             ) : (
-              <Stack divider={<StackDivider />} spacing="4">
+              <Stack divider={<StackDivider />} spacing="2">
+                <Heading size="md" textAlign="center">
+                  <Logo />
+                </Heading>
                 <Box>
-                  <Heading size="md" textAlign="center">
+                  <Heading size="md" textAlign="center" my="4px">
                     {"Track coureses you've played"}
                   </Heading>
-                </Box>
-                <Box>
-                  <Heading size="md" textAlign="center">
+
+                  <Heading size="md" textAlign="center" my="4px">
                     {'Save ones you want to play.'}
                   </Heading>
-                </Box>
-                <Box>
-                  <Heading size="md" textAlign="center">
+
+                  <Heading size="md" textAlign="center" my="4px">
                     {"Tell your friends where's good."}
                   </Heading>
                 </Box>
@@ -57,6 +57,6 @@ export default function Home() {
           </CardBody>
         </Card>
       </Container>
-      </Box>
+    </Box>
   )
 }
