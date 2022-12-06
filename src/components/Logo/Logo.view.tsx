@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 import { Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
@@ -12,7 +12,6 @@ export const Logo = ({ variants }: any) => {
 		// 	variants={variants}
 		// >
 		<Link href="/">
-
 			<Text fontSize="2xl" fontWeight="extrabold">
 				{"🏌🏻‍♂️"}
 				{"Provisional"}
@@ -20,4 +19,4 @@ export const Logo = ({ variants }: any) => {
 		</Link>
 		// </motion.h1>
 	);
-}
+};

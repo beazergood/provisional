@@ -18,7 +18,7 @@ export type FlippableCardProps = {
 	imgUrl: string;
 };
 
-const Card = styled.div<{imgUrl:string}>`
+const Card = styled.div<{ imgUrl: string }>`
   box-sizing: border-box;
   background: url(${(props) => props?.imgUrl}) no-repeat;
   background-size: cover;
