@@ -13,9 +13,10 @@ import {
 	// useDisclosure,
 	useColorModeValue,
 	Stack,
-	// useColorMode,
+	useColorMode,
 	Center,
 } from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
 	useSession,
 	useSupabaseClient,
@@ -42,7 +43,7 @@ const NavLink = ({ children, url }: { children: ReactNode; url: string }) => (
 );
 
 export const Nav = () => {
-	// const { colorMode, toggleColorMode } = useColorMode()
+	const { colorMode, toggleColorMode } = useColorMode()
 	// const { isOpen, onOpen, onClose } = useDisclosure()
 	const session: Session | null = useSession();
 	const supabase = useSupabaseClient<Database>();
@@ -65,9 +66,9 @@ export const Nav = () => {
 					<Flex alignItems={"center"}>
 						<Stack direction={"row"} spacing={7}>
 							{/* FIX ME */}
-							{/* <Button onClick={toggleColorMode}>
+							<Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              </Button> */}
+              </Button>
 
 							{session ? (
 								<Menu>
