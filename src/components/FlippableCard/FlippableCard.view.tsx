@@ -22,7 +22,6 @@ const Card = styled.div<{ imgUrl: string }>`
   box-sizing: border-box;
   background: url(${(props) => props?.imgUrl}) no-repeat;
   background-size: cover;
-  /* min-height: 300px; */
   width: 350px;
   border-radius: 3px;
   padding: 10px;
@@ -106,7 +105,6 @@ const CourseCardFrontContainer = styled.div`
   -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   justify-content: space-between;
 `;
 
@@ -168,7 +166,6 @@ interface CourseCardBackProps {
 
 const CourseCardBackContainer = styled.div`
   box-sizing: border-box;
-  /* position: absolute; */
   transform: rotateY(180deg);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
@@ -236,11 +233,6 @@ export const CourseCardBack = ({
 				<H3>{courseName}</H3>
 				<H5>{location}</H5>
 			</TextContainer>
-			<ButtonsContainer>
-				<IconButton Icon={<ThumbDown size="40" color="#444" />} />
-				<IconButton Icon={<Star size="40" color="#444" />} />
-				<IconButton Icon={<ThumbUp size="40" color="#444" />} />
-			</ButtonsContainer>
 			<Slider label="Vibe" color="#FFDC24" />
 			<Slider label="Course" color="#FFDC24" />
 			<Slider label="My Rating" color="#FFDC24" value={rating} />
