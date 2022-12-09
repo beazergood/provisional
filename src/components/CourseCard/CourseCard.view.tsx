@@ -1,64 +1,92 @@
+import React, { useState } from "react";
+import styled from "styled-components";
 import {
-	Button,
-	ButtonGroup,
-	Card,
-	CardBody,
-	CardFooter,
-	Heading,
-	Image,
-	Text,
-	Stack,
-	useDisclosure,
-	useColorMode,
-	useColorModeValue,
+  Box,
+  Center,
+  Heading,
+  Text,
+  HStack,
+  VStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { Collapse } from "@chakra-ui/transition";
 
-export interface CourseCardProps {
-	name?: string;
-	city?: string;
-	state?: string;
-	imgUrl?: string;
-	rating?: string;
-	variant: string;
-}
+import {
+  Star,
+  ThumbUp,
+  ThumbDown,
+  InformationCircle,
+  XCircle,
+} from "@styled-icons/heroicons-outline";
 
-export default function CourseCard({
-	name,
-	city,
-	state,
-	imgUrl,
-	rating = "5",
-}: CourseCardProps) {
-	const { isOpen, onToggle } = useDisclosure();
-	const bg = useColorModeValue("brand.100", "brand.600");
+import { IconButton } from "../IconButton/IconButton.view";
 
-	return (
-		<Card maxW="sm" my="4" bg={bg}>
-			<Image src={imgUrl} alt={name} borderRadius="lg" />
-			<CardBody>
-				<Stack mt="6" spacing="3">
-					<Heading size="md">{name}</Heading>
-					<Text>
-						{city}, {state}
-					</Text>
-					<Text color="blue.600" fontSize="2xl" onClick={onToggle}>
-						{rating}
-					</Text>
-				</Stack>
-			</CardBody>
-			<Collapse in={isOpen} animateOpacity={true}>
-				<CardFooter>
-					<ButtonGroup spacing="2">
-						<Button variant="solid" colorScheme="blue">
-							Rate
-						</Button>
-						<Button variant="ghost" colorScheme="blue">
-							Hate
-						</Button>
-					</ButtonGroup>
-				</CardFooter>
-			</Collapse>
-		</Card>
-	);
-}
+const CourseCardDiv = styled.div<{ imgUrl: string }>`
+  box-sizing: border-box;
+  background: url(${(props) => props?.imgUrl}) no-repeat;
+  background-size: cover;
+   min-height: 300px; 
+  width: 350px;
+  border-radius: 3px;
+  padding: 10px;
+  display: flex;
+  flex-direction column;
+  justify-content: space-between;
+  position: relative;
+  transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+  transform-style: preserve-3d;
+  transition: 150ms;
+
+  &.card.flip {
+    --rotate-y: 180deg;
+    height: 440px;
+  }
+`;
+
+const MoreInfo = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+
+  &.flipped {
+    transform: rotateY(180deg);
+    transition: 150ms;
+  }
+`;
+
+/**
+ * Primary UI component for user interaction
+ */
+export const CourseCard: React.FC<{
+  courseName: string;
+  location: string;
+  imgUrl: string;
+  variant: string;
+}> = ({ courseName, location, imgUrl, variant }) => {
+  const [flip, setFlip] = useState(false);
+
+  const bg = useColorModeValue("brand.400", "brand.600");
+
+  return (
+    <Box>
+      <CourseCardDiv imgUrl={imgUrl}>
+        <VStack spacing="64px" alignItems="flex-start">
+          <Heading>
+            {courseName}
+          </Heading>
+          <Text fontSize="3xl" textAlign="left">
+            {location}
+          </Text>
+          <Center w="100%">
+            <HStack spacing="44px">
+              <IconButton Icon={<ThumbDown size="40" color="#444" />} />
+              <IconButton Icon={<Star size="40" color="#444" />} />
+              <IconButton Icon={<ThumbUp size="40" color="#444" />} />
+            </HStack>
+          </Center>
+        </VStack>
+      </CourseCardDiv>
+    </Box>
+  );
+};
+
+export type CallToActionProps = React.ComponentProps<typeof CourseCard>;
