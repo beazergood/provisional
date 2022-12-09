@@ -89,4 +89,4 @@ export const CourseCard: React.FC<{
   );
 };
 
-export type CallToActionProps = React.ComponentProps<typeof CourseCard>;
+export type CourseCardProps = React.ComponentProps<typeof CourseCard>;
