@@ -1,8 +1,12 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Flex } from '@chakra-ui/react';
+import {
+  ThumbUp,
+  ThumbDown,
+  PlusCircle,
+} from "@styled-icons/heroicons-outline";
+
 import {BouncingBar} from './BouncingBar.view';
-import type {BouncingBarProps} from './BouncingBar.view';
 
 export default {
     title: 'Components/BouncingBar',
@@ -12,10 +16,12 @@ export default {
     },
   } as ComponentMeta<typeof BouncingBar>;
   
-  const Template: ComponentStory<BouncingBarProps> = (args) => <Flex>    <BouncingBar {...args}  />  </Flex>
+  const Template: ComponentStory<typeof BouncingBar> = (args) => <BouncingBar {...args} />  
 
 export const Main = Template.bind({});
 
 Main.args = {
-  icons: ["ThumbDown", "Star", "ThumbUp"]
+  iconLeft: <PlusCircle/>,
+  iconCenter:  <ThumbDown/>,
+  iconRight: <ThumbUp/>
 };

@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import { motion, useAnimation } from 'framer-motion';
-import {
-  Box,
-} from "@chakra-ui/react";
 
 import {
   Star,
-  ThumbUp,
-  ThumbDown,
-  InformationCircle,
-  XCircle,
-  PlusCircle,
+  
 } from "@styled-icons/heroicons-outline";
 
 import styles from './BouncingBar.module.scss'
-
 
 const bubbleVariants = {
   opened: {
@@ -26,8 +18,15 @@ const bubbleVariants = {
     opacity: 0
   }
 }
-export const BouncingBar = ({
-  icons:[]
+
+export const BouncingBar: React.FC<{
+  iconLeft: React.ReactNode;
+  iconCenter: React.ReactNode;
+  iconRight: React.ReactNode;
+}> = ({
+  iconLeft,
+  iconCenter,
+  iconRight
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isTapping, setIsTapping] = useState(false);
@@ -78,7 +77,7 @@ export const BouncingBar = ({
             onTapCancel={handleTapCancel}
             whileTap={{ backgroundColor: '#ffcdcc' }}
           >
-            <PlusCircle/>
+            {iconLeft}
           </motion.div>
          
         </div>
@@ -96,7 +95,7 @@ export const BouncingBar = ({
             className={styles["bubble"]}
             variants={bubbleVariants}
           >
-            <ThumbDown/>
+           {iconCenter}
           </motion.div>
           <motion.div 
             className={styles["bubble"]}
@@ -109,7 +108,7 @@ export const BouncingBar = ({
             className={styles["bubble"]}
             variants={bubbleVariants}
           >
-            <ThumbUp/>
+            {iconRight}
           </motion.div>
         </motion.div>
       </div>
