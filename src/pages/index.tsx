@@ -1,16 +1,11 @@
+import { useState } from "react";
 import supabase from "../utils/supabase";
 import { motion } from "framer-motion";
-import {
-  Flex,
-  Spacer,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Button, Flex, HStack, Spacer } from "@chakra-ui/react";
 
-import {
-  CourseCard,
-  CourseCardProps,
-} from "../components/CourseCard/CourseCard.view";
+import { CourseCard } from "../components/CourseCard/CourseCard.view";
+import type { CourseCardProps } from "../components/CourseCard/CourseCard.view";
+import { FlippableCard } from "../components/FlippableCard/FlippableCard.view";
 
 const randomImage = () => {
   const imageUrls = [
@@ -62,68 +57,82 @@ const item = {
   show: { opacity: 1, x: 0 },
 };
 
-const logoVariants = {
-  hidden: { opacity: 0, x: -400, y: 0 },
-  visible: { opacity: 1, x: 0, y: 0 },
-  exit: { opacity: 0, x: 0, y: 100 },
-};
-
 export default function Courses({ data }: { data: CourseCardProps[] }) {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("brand.100", "brand.600");
+  const [cardType, setCardType] = useState("normal");
 
-  const coursesList = (variant: string) => {
-    console.log('variant: ', variant)
+  const coursesList = () => {
     return data.map((course: any) => {
-    return (
-      <motion.div
-        variants={item}
-        style={{ margin: "5px auto" }}
-        key={course.id}
-      >
-        {course && (
+      return (
+        <motion.div
+          variants={item}
+          style={{ margin: "5px auto" }}
+          key={course.id}
+        >
           <CourseCard
             courseName={course.name}
             location={course.city + ", " + course.state}
             imgUrl={randomImage()}
-            variant={variant}
+            variant={"variant"}
           />
-        )}
-      </motion.div>
-    );
-        
-  });
-};
+        </motion.div>
+      );
+    });
+  };
+
+  const coursesListAlt = () => {
+    return data.map((course: any) => {
+      return (
+        <motion.div
+          variants={item}
+          style={{ margin: "5px auto" }}
+          key={course.id}
+        >
+          <FlippableCard
+            courseName={course.name}
+            location={course.city + ", " + course.state}
+            imgUrl={randomImage()}
+            rating={course.rating}
+          />
+        </motion.div>
+      );
+    });
+  };
 
   return (
-    <Flex direction={"row"} alignItems={"center"}>
-      <Spacer />
-      <motion.main
-        variants={variants} // Pass the variant object into Framer Motion
-        initial="hidden" // Set the initial state to variants.hidden
-        animate="enter" // Animated state to variants.enter
-        exit="exit" // Exit state (used later) to variants.exit
-        transition={{ type: "linear" }} // Set the transition to linear
-        className=""
-      >
-        <motion.ul variants={container} initial="hidden" animate="show">
-          {coursesList('normal')}
-        </motion.ul>
-      </motion.main>
-      <Spacer />
-      <motion.main
-        variants={variants} // Pass the variant object into Framer Motion
-        initial="hidden" // Set the initial state to variants.hidden
-        animate="enter" // Animated state to variants.enter
-        exit="exit" // Exit state (used later) to variants.exit
-        transition={{ type: "linear" }} // Set the transition to linear
-        className=""
-      >
-        <motion.ul variants={container} initial="hidden" animate="show">
-          {coursesList('alt')}
-        </motion.ul>
-      </motion.main>
-      <Spacer />
+    <Flex direction={"column"} alignItems={"center"}>
+      <HStack spacing="5">
+        <Button
+          size="sm"
+          variant={cardType === "normal" ? "solid" : "outline"}
+          onClick={() => setCardType("normal")}
+        >
+          Style A
+        </Button>
+        <Button size="sm" 
+        variant={cardType === "alt" ? "solid" : "outline"}
+        onClick={() => setCardType("alt")}>
+          Style B
+        </Button>
+      </HStack>
+      <Flex direction={"row"} alignItems={"center"}>
+        <Spacer />
+        <motion.main
+          variants={variants} // Pass the variant object into Framer Motion
+          initial="hidden" // Set the initial state to variants.hidden
+          animate="enter" // Animated state to variants.enter
+          exit="exit" // Exit state (used later) to variants.exit
+          transition={{ type: "linear" }} // Set the transition to linear
+          className=""
+        >
+          <motion.ul variants={container} initial="hidden" animate="show">
+            {cardType === "normal" ? coursesList() : coursesListAlt()}
+          </motion.ul>
+        </motion.main>
+
+        <Spacer />
+
+        <Spacer />
+      </Flex>
     </Flex>
   );
 }
